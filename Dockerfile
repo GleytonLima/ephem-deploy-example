@@ -28,7 +28,8 @@ RUN eval `ssh-agent -s` && \
     git clone git@github.com:borse/PHERM-odoo13---custom-addons.git $HOME/odca && \
     cd $HOME/odca && \
     git fetch origin && \
-    git checkout 16_national_master
+    git checkout 16_national_dev && \
+    git pull origin 16_national_dev
 
 # Clone odoo16
 RUN git clone https://www.github.com/odoo/odoo --depth 1 --branch 16.0 --single-branch $HOME/odoo
