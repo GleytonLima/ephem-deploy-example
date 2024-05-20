@@ -43,7 +43,5 @@ services:
       - .env
     volumes:
       - ./odoo16.conf:/etc/odoo16.conf
-      # this overrides the default odoo addons file for kanban view to pt_BR
-      - ./custom_translations/stagestatesignals.xml:/root/odca/eoc_signals/data/stagestatesignals.xml
 volumes:
   dbvolume:
