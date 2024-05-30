@@ -23,14 +23,6 @@ ENV SSH_KEY_PASSWORD=$SSH_KEY_PASSWORD
 
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
-RUN eval `ssh-agent -s` && \
-    echo $SSH_KEY_PASSWORD | SSH_ASKPASS=/bin/cat setsid -w ssh-add && \
-    git clone git@github.com:borse/PHERM-odoo13---custom-addons.git $HOME/odca && \
-    cd $HOME/odca && \
-    git fetch origin && \
-    git checkout 16_national_dev && \
-    git pull origin 16_national_dev
-
 # Clone odoo16
 RUN git clone https://www.github.com/odoo/odoo --depth 1 --branch 16.0 --single-branch $HOME/odoo
 
@@ -46,4 +38,9 @@ RUN dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb
 RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
 RUN apt install -y ./wkhtmltox_0.12.5-1.bionic_amd64.deb
 
+RUN eval `ssh-agent -s` && \
+    echo $SSH_KEY_PASSWORD | SSH_ASKPASS=/bin/cat setsid -w ssh-add && \
+    git clone git@github.com:borse/PHERM-odoo13---custom-addons.git --depth 1 --branch 16_national_dev --single-branch $HOME/odca
+
 WORKDIR $HOME
+
