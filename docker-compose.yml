@@ -35,7 +35,7 @@ services:
         - SSH_KEY_PASSWORD=${SSH_KEY_PASSWORD}
     container_name: ephem-container
     # changeme: if you want to use a differente home folder change Dockerfile and odoo16.conf
-    command: python3 /root/odoo/odoo-bin -c /etc/odoo16.conf -u all
+    command: python3 /root/odoo/odoo-bin -c /etc/odoo16.conf -u eoc_base
     ports:
       - "8069:8069"
       - "8060:8060"
@@ -43,5 +43,18 @@ services:
       - .env
     volumes:
       - ./odoo16.conf:/etc/odoo16.conf
+      - ./odoo_share:/root/.local/share/Odoo
+    expose:
+      - "8069"
+      - "8060"
+    environment:
+      VIRTUAL_HOST: caboverde.gdsephem.online
+      LETSENCRYPT_HOST: caboverde.gdsephem.online
+      LETSENCRYPT_EMAIL: gleytonclima@gmail.com
 volumes:
   dbvolume:
+
+networks:
+  default:
+    external:
+      name: proxy
