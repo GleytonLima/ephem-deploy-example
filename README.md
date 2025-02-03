@@ -88,7 +88,3 @@ The `docker-compose.yml` file contains an image entry named `backup` that is use
 ## Restore a Database Backup
 
 Access http://localhost:8069/web/database/manager and click on the "Restore Database" button. And choose the backup file.
-
-# Configuring proxy, ssl and domain
-
-TODO
